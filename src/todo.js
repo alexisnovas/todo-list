@@ -44,6 +44,11 @@ const Todo = ((newTitle = 'New Task', newDesc, newDueDate, newPriority = 2) => {
   }
 
   return {
+    title,
+    description,
+    dueDate,
+    priority,
+    creationDate,
     changeTitle,
     changeDescription,
     changeDueDate,

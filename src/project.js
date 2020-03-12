@@ -1,17 +1,19 @@
 import display from './display';
+import Todo from './todo';
+import TodoList from './TodoList';
 
-const project = (() => {
+const Project = (() => {
   display.pageSetup();
   const projectContainer = document.querySelector('#project-list');
   const projectForm = document.getElementById('project-form');
   const projectInput = document.getElementById('project-input');
+  let todos = [];
 
   const projects = [{
     id: Date.now().toString(),
     name: 'Microverse',
     tasks: [],
   }];
-
 
   const createList = (name) => ({
     id: Date.now().toString(),
@@ -53,10 +55,15 @@ const project = (() => {
     }
   });
 
+  const addTodo = (Todo) => {
+    todos.push(Todo);
+  };
 
   return {
+    todos,
+    addTodo,
     render,
   };
 })();
 
-export default project;
+export default Project;
