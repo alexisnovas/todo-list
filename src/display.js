@@ -29,7 +29,6 @@ const display = (() => {
     const projectList = document.createElement('ul');
     projectList.id = 'project-list';
 
-
     const columnTwo = document.createElement('div');
     columnTwo.classList.add('col-6');
     columnTwo.id = 'columnTwo';

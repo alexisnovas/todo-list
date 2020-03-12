@@ -33,7 +33,6 @@ const project = (() => {
       projectElement.id = proj.id;
       projectElement.classList.add('project-item');
       projectElement.textContent = proj.name;
-      projectElement.onclick = 'getSelectedProject(this)';
       projectContainer.appendChild(projectElement);
     });
   };
@@ -51,13 +50,8 @@ const project = (() => {
   projectContainer.addEventListener('click', (e) => {
     if (e.target.tagName.toLowerCase() === 'li') {
       alert(e.target.id);
-      //console.log(e.target.id);
     }
   });
-
-  const getSelectedProject = () => {
-
-  };
 
 
   return {
