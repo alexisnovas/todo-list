@@ -34,9 +34,42 @@ const display = (() => {
     columnTwo.id = 'columnTwo';
     const listHeader = document.createElement('h1');
     listHeader.textContent = 'Lists';
+
+    const todoForm = document.createElement('form');
+    todoForm.classList.add('form-group');
+    todoForm.id = 'todo-form';
+    const todoTitle = document.createElement('input');
+    todoTitle.id = 'todo-title';
+    todoTitle.classList.add('form-control');
+    todoTitle.placeholder = 'Add Title';
+    const todoDesc = document.createElement('input');
+    todoDesc.classList.add('form-control');
+    todoDesc.placeholder = 'Add description';
+    todoDesc.id = 'todo-desc';
+    const todoDueDate = document.createElement('input');
+    todoDueDate.type = 'date';
+    todoDueDate.classList.add('form-control');
+    todoDueDate.id = 'todo-date';
+    const select = document.createElement('select');
+    select.classList.add('form-control');
+    select.id = "priority"
+
+    const optionOne = document.createElement('option');
+    optionOne.value = '1';
+    optionOne.textContent = '1';
+    const optionTwo = document.createElement('option');
+    optionTwo.value = '2';
+    optionTwo.textContent = '2';
+    const optionThree = document.createElement('option');
+    optionThree.value = '3';
+    optionThree.textContent = '3';
+    const taskButton = document.createElement('button');
+    taskButton.classList.add('btn');
+    taskButton.classList.add('btn-primary');
+    taskButton.textContent = 'Add New Todo';
+
     const listTab = document.createElement('div');
     const list = document.createElement('ul');
-    const listItem = document.createElement('li');
 
 
     main.appendChild(container);
@@ -56,9 +89,17 @@ const display = (() => {
 
     row.appendChild(columnTwo);
     columnTwo.appendChild(listHeader);
+    listHeader.appendChild(todoForm);
+    todoForm.appendChild(todoTitle);
+    todoForm.appendChild(todoDesc);
+    todoForm.appendChild(todoDueDate);
+    todoForm.appendChild(select);
+    select.appendChild(optionOne);
+    select.appendChild(optionTwo);
+    select.appendChild(optionThree);
+    todoForm.appendChild(taskButton);
     listHeader.appendChild(listTab);
     listTab.appendChild(list);
-    list.appendChild(listItem);
 
 
     console.log(main);

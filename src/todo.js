@@ -1,4 +1,5 @@
 const Todo = (newTitle = 'New Task', newDesc, newDueDate, newPriority = 2) => {
+  let id = '';
   let title = newTitle;
   let description = newDesc;
   let dueDate = newDueDate;
@@ -19,6 +20,10 @@ const Todo = (newTitle = 'New Task', newDesc, newDueDate, newPriority = 2) => {
     }
 
     return true;
+  };
+
+  const changeID = (string) => {
+    id = string
   };
 
   const changeTitle = (string) => {
@@ -49,6 +54,7 @@ const Todo = (newTitle = 'New Task', newDesc, newDueDate, newPriority = 2) => {
     description,
     dueDate,
     priority,
+    changeID,
     creationDate,
     changeTitle,
     changeDescription,

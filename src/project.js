@@ -1,16 +1,18 @@
 import display from './display';
+import Todo from './todo';
+import TodoList from './todolist';
 
 const Project = () => {
   display.pageSetup();
   const projectContainer = document.querySelector('#project-list');
   const projectForm = document.getElementById('project-form');
   const projectInput = document.getElementById('project-input');
+  const todoForm = document.getElementById('todo-form');
   const todos = [];
 
   const projects = [{
     id: Date.now().toString(),
     name: 'Microverse',
-    tasks: [],
   }];
 
   const createList = (name) => ({
@@ -37,6 +39,22 @@ const Project = () => {
     });
   };
 
+  const addTask = () => {
+    let selectedProject;
+    projectContainer.addEventListener('click', (e) => {
+      if (e.target.tagName.toLowerCase() === 'li') {
+        alert(e.target.id);
+        console.log(e.target.tasks);
+        selectedProject = e.target.id;
+
+
+        // call function to display form to add task
+      }
+    });
+  };
+
+  addTask();
+
   projectForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const projectName = projectInput.value;
@@ -47,15 +65,32 @@ const Project = () => {
     render();
   });
 
-  projectContainer.addEventListener('click', (e) => {
-    if (e.target.tagName.toLowerCase() === 'li') {
-      alert(e.target.id);
-    }
+
+  const createTask = (title, desc, dueDate, priority) => ({
+    id: Date.now().toString(),
+    title,
+    desc,
+    dueDate,
+    priority,
   });
 
-  const addTodo = (Todo) => {
-    todos.push(Todo);
+  const addTodo = (tasks) => {
+    todos.push(tasks);
+    // projects.tasks.push(Todo)
   };
+
+  todoForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formTitle = document.getElementById('todo-title').value;
+    const formDesc = document.getElementById('todo-desc').value;
+    const formDueDate = document.getElementById('todo-date').value;
+    const formPriority = document.getElementById('priority').value;
+
+    const todoObject = Todo(formTitle, formDesc, formDueDate, formPriority);
+    addTodo(todoObject);
+    console.log(todos);
+  });
+
 
   return {
     todos,
