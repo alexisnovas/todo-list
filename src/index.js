@@ -1,3 +1,5 @@
-document.getElementById('btn').addEventListener('click', () => {
-  alert('its working');
-});
+//import display from './display';
+import project from './project';
+
+//display.pageSetup();
+project.render();
