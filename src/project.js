@@ -1,13 +1,11 @@
 import display from './display';
-import Todo from './todo';
-import TodoList from './TodoList';
 
-const Project = (() => {
+const Project = () => {
   display.pageSetup();
   const projectContainer = document.querySelector('#project-list');
   const projectForm = document.getElementById('project-form');
   const projectInput = document.getElementById('project-input');
-  let todos = [];
+  const todos = [];
 
   const projects = [{
     id: Date.now().toString(),
@@ -28,7 +26,7 @@ const Project = (() => {
   };
 
   const render = () => {
-    //console.log(projects);
+    // console.log(projects);
     clear(projectContainer);
     projects.forEach((proj) => {
       const projectElement = document.createElement('li');
@@ -64,6 +62,9 @@ const Project = (() => {
     addTodo,
     render,
   };
-})();
+};
 
+
+// let item = Project()
+// item.todos[0]
 export default Project;
