@@ -1,40 +1,48 @@
-const display = (() => {
+const Display = () => {
   const pageSetup = () => {
-    const main = document.getElementById('main');
-    const container = document.createElement('div');
-    container.classList.add('container');
+    const main = document.getElementById('container');
     const row = document.createElement('div');
     row.classList.add('row');
+    main.appendChild(row);
 
     const columnOne = document.createElement('div');
-    columnOne.classList.add('col-6');
-    columnOne.id = 'columnOne';
+    columnOne.classList.add('col-md-4');
+    columnOne.id = 'column-one';
+    row.appendChild(columnOne);
+
     const projectHeader = document.createElement('h1');
     projectHeader.textContent = 'Projects';
+    columnOne.appendChild(projectHeader);
 
-
+    // add this to a function
     const form = document.createElement('form');
     form.id = 'project-form';
     const input = document.createElement('input');
     input.type = 'text';
     input.id = 'project-input';
     input.classList.add('form-control');
-
     const projectButton = document.createElement('button');
     projectButton.classList.add('btn');
     projectButton.classList.add('btn-primary');
     projectButton.textContent = 'Add Project';
+    columnOne.appendChild(form);
+    form.appendChild(input);
+    form.appendChild(projectButton);
 
-    const projectTab = document.createElement('div');
     const projectList = document.createElement('ul');
     projectList.id = 'project-list';
+    columnOne.appendChild(projectList);
 
     const columnTwo = document.createElement('div');
-    columnTwo.classList.add('col-6');
-    columnTwo.id = 'columnTwo';
+    columnTwo.classList.add('col-md-8');
+    columnTwo.id = 'column-two';
+    row.appendChild(columnTwo);
+
     const listHeader = document.createElement('h1');
     listHeader.textContent = 'Lists';
+    columnTwo.appendChild(listHeader);
 
+    // add this to a function
     const todoForm = document.createElement('form');
     todoForm.classList.add('form-group');
     todoForm.id = 'todo-form';
@@ -53,7 +61,6 @@ const display = (() => {
     const select = document.createElement('select');
     select.classList.add('form-control');
     select.id = 'priority';
-
     const optionOne = document.createElement('option');
     optionOne.value = '1';
     optionOne.textContent = '1';
@@ -67,30 +74,7 @@ const display = (() => {
     taskButton.classList.add('btn');
     taskButton.classList.add('btn-primary');
     taskButton.textContent = 'Add New Todo';
-
-    const listTab = document.createElement('div');
-    const list = document.createElement('ul');
-    list.id = 'TodoList';
-
-
-    main.appendChild(container);
-    container.appendChild(row);
-
-    row.appendChild(columnOne);
-    columnOne.appendChild(projectHeader);
-    // projectHeader.appendChild(projectButton);
-    projectHeader.appendChild(form);
-    form.appendChild(input);
-    form.appendChild(projectButton);
-
-
-    projectHeader.appendChild(projectTab);
-    projectTab.appendChild(projectList);
-
-
-    row.appendChild(columnTwo);
-    columnTwo.appendChild(listHeader);
-    listHeader.appendChild(todoForm);
+    columnTwo.appendChild(todoForm);
     todoForm.appendChild(todoTitle);
     todoForm.appendChild(todoDesc);
     todoForm.appendChild(todoDueDate);
@@ -99,16 +83,16 @@ const display = (() => {
     select.appendChild(optionTwo);
     select.appendChild(optionThree);
     todoForm.appendChild(taskButton);
-    columnTwo.appendChild(listTab);
-    listTab.appendChild(list);
 
-
-    console.log(main);
+    const todoList = document.createElement('ul');
+    todoList.classList.add('todo-list');
+    todoList.id = 'todo-list';
+    columnTwo.appendChild(todoList);
   };
 
   return {
     pageSetup,
   };
-})();
+};
 
-export default display;
+export default Display;

@@ -1,12 +1,12 @@
-import display from './display';
+/* eslint-disable no-alert */
+/* eslint-disable no-console */
 import Todo from './todo';
 import TodoList from './todolist';
 import Project from './project';
 
 const ProjectList = () => {
-  display.pageSetup();
   const projectContainer = document.querySelector('#project-list');
-  const todoContainer = document.querySelector('#TodoList');
+  const todoContainer = document.querySelector('#todoList');
   const projectForm = document.getElementById('project-form');
   const projectInput = document.getElementById('project-input');
   const todoForm = document.querySelector('#todo-form');
@@ -18,14 +18,16 @@ const ProjectList = () => {
     }
   };
 
-  const render = () => {
-    clear(projectContainer);
+  const renderProjects = () => {
+    const projectList = document.getElementById('project-list');
+    projectList.innerHTML = '';
+
     for (let i = 0; i < projects.length; i += 1) {
       const projectElement = document.createElement('li');
-      projectElement.id = projects[i].id;
+      projectElement.id = `project-${i}`;
       projectElement.classList.add('project-item');
       projectElement.textContent = projects[i].title;
-      projectContainer.appendChild(projectElement);
+      projectList.appendChild(projectElement);
     }
   };
 
@@ -39,7 +41,7 @@ const ProjectList = () => {
     projects[0].addTodo(todoObject);
     const keys = Object.values(todoObject);
     clear(todoContainer);
-    document.getElementById('TodoList').appendChild(TodoList(projects[0]));
+    document.getElementById('column-two').appendChild(TodoList(projects[0]));
 
 
     console.log(keys);
@@ -69,9 +71,8 @@ const ProjectList = () => {
     const newProject = Project(projectName);
     projectInput.value = null;
     projects.push(newProject);
-    render();
+    renderProjects();
   });
-
 
   const createTask = (title, desc, dueDate, priority) => ({
     id: Date.now().toString(),
@@ -83,34 +84,22 @@ const ProjectList = () => {
 
   const addProject = (Obj) => {
     projects.push(Obj);
+    renderProjects();
   };
 
   todoForm.addEventListener('submit', (e) => {
     e.preventDefault();
     renderTodos();
-
-
-  /*  const formTitle = document.getElementById('todo-title').value;
-    const formDesc = document.getElementById('todo-desc').value;
-    const formDueDate = document.getElementById('todo-date').value;
-    const formPriority = document.getElementById('priority').value;
-
-    const todoObject = Todo(formTitle, formDesc, formDueDate, formPriority);
-    projects[0].addTodo(todoObject);
-    console.log(projects[0].todos);
-
-    const keys = Object.values(todoObject);
-    console.log("This is the title "+keys[0]);
-    console.log("This is the desc "+keys[1]); */
-    // document.getElementById('columnTwo').appendChild(TodoList(projects[0]));
   });
 
-  return {
+  renderProjects();
+  renderTodos();
 
+  return {
     projects,
-    render,
+    render: renderProjects,
     addProject,
-    renderTodos
+    renderTodos,
   };
 };
 

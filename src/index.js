@@ -1,13 +1,11 @@
-// import display from './display';
+import Display from './display';
 import ProjectList from './projectlist';
-import './css/style.css';
-import Todo from './todo';
-import TodoList from './todolist';
 import Project from './project';
+import Todo from './todo';
+import './css/style.css';
 
-
-// display.pageSetup();
-// Project.render();
+const ui = Display();
+ui.pageSetup();
 
 const list = ProjectList();
 
