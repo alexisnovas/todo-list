@@ -32,6 +32,13 @@ const ProjectList = () => {
     }
   };
 
+  const switchStyling = (number) => {
+    projects.forEach((item) => {
+      console.log(item);
+    });
+
+  };
+
   const renderProjects = () => {
     const projectList = document.getElementById('project-list');
     projectList.innerHTML = '';
@@ -39,16 +46,19 @@ const ProjectList = () => {
     for (let i = 0; i < projects.length; i += 1) {
       const projectElement = document.createElement('li');
       projectElement.id = `project-${i}`;
-      projectElement.classList.add('project-item');
+      projectElement.id = 'project-item';
+      // projectElement.classList.add('project-item');
       projectElement.textContent = projects[i].title;
       // eslint-disable-next-line no-loop-func
       projectElement.addEventListener('click', () => {
         renderTodos(i);
         currentProject = i;
+        switchStyling(projectElement);
       });
       projectList.appendChild(projectElement);
     }
   };
+
 
   const addTodoFromForm = (number = 0) => {
     const formTitle = document.getElementById('todo-title').value;

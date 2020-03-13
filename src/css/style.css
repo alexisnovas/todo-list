@@ -1,4 +1,23 @@
-#columnOne{
+body{
+  font-size: 14px;
+  font-family: 'Open Sans';
+  max-width: 1400px;
 }
-#columnTwo{
+button{
+  margin-top: 10px;
+}
+input{
+  margin: 5px 0;
+}
+.container{
+  width: 100%;
+  margin: 2rem auto;
+}
+.active{
+  font-weight: bold;
+  color: blue;
+}
+.project-item:focus{
+  font-weight: bold;
+  color: blue;
 }
