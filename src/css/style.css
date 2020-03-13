@@ -14,10 +14,33 @@ input{
   margin: 2rem auto;
 }
 .active{
-  font-weight: bold;
+  font-weight: 900;
   color: blue;
+  font-size: 15px;
 }
-.project-item:focus{
-  font-weight: bold;
-  color: blue;
+
+#project-list{
+  padding: 10px 0;
+  margin: 0 15px;
+}
+#project-list li{
+  margin: 0 19px;
+}
+.todo-list{
+  padding: 0;
+  margin: 0;
+}
+.col-12{
+  margin: 10px 0;
+  padding: 10px;
+  list-style: none;
+  border: 1px solid #ced4da;
+}
+.actionButtons{
+  position: absolute;
+  top: 0;
+  right: 2%;
+}
+.actionButtons button{
+  margin-left: 5px;
 }

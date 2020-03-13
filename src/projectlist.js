@@ -22,21 +22,38 @@ const ProjectList = () => {
       todoElement.className = 'col-12';
       todoElement.id = `todo-${i}`;
       todoElement.innerHTML = `
-        Task: ${projects[number].todos[i].title}<br>
-        Description: ${projects[number].todos[i].description}<br>
+        <strong>Task: ${projects[number].todos[i].title}</strong><br>
         Due Date: ${projects[number].todos[i].dueDate}<br>
-        Priority: ${projects[number].todos[i].priority}<br>
         `;
+      const actionDiv = document.createElement('div')
+      actionDiv.classList.add('actionButtons')
+      const editBtn = document.createElement('button')
+      editBtn.textContent = 'Edit Task'
+      editBtn.classList.add('btn')
+      editBtn.classList.add('btn-info')
+      const deleteBtn = document.createElement('button')
+      deleteBtn.textContent = 'Delete Task'
+      deleteBtn.classList.add('btn')
+      deleteBtn.classList.add('btn-danger')
+
 
       todoList.appendChild(todoElement);
+      todoElement.appendChild(actionDiv)
+      actionDiv.appendChild(editBtn)
+      actionDiv.appendChild(deleteBtn)
+
+      todoElement.addEventListener('click', () => {
+        console.log(`${projects[number].todos[i].title}and ${projects[number].todos[i].description}`);
+        todoElement.innerHTML = `
+          <strong>Task: ${projects[number].todos[i].title}</strong><br>
+          <strong>Description: ${projects[number].todos[i].description}</strong><br>
+          <strong>Due Date: ${projects[number].todos[i].dueDate}</strong><br>
+          <strong>Priority: ${projects[number].todos[i].priority}</strong><br>
+          `;
+      });
     }
   };
 
-  const switchStyling = (number) => {
-    projects.forEach((item) => {
-      console.log(item);
-    });
-  };
 
   const cleanActive = () => {
     for (let i = 0; i < projects.length; i += 1) {
@@ -60,7 +77,6 @@ const ProjectList = () => {
         renderTodos(i);
         currentProject = i;
         cleanActive();
-        // switchStyling(projectElement);
         projectElement.classList.add('active');
       });
       projectList.appendChild(projectElement);
