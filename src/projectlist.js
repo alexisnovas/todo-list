@@ -1,7 +1,7 @@
 /* eslint-disable no-alert */
 /* eslint-disable no-console */
 import Todo from './todo';
-import TodoList from './todolist';
+// import TodoList from './todolist';
 import Project from './project';
 
 const ProjectList = () => {
@@ -11,25 +11,7 @@ const ProjectList = () => {
   const projectInput = document.getElementById('project-input');
   const todoForm = document.querySelector('#todo-form');
   const projects = [];
-
-  const clear = (element) => {
-    while (element.firstChild) {
-      element.removeChild(element.firstChild);
-    }
-  };
-
-  const renderProjects = () => {
-    const projectList = document.getElementById('project-list');
-    projectList.innerHTML = '';
-
-    for (let i = 0; i < projects.length; i += 1) {
-      const projectElement = document.createElement('li');
-      projectElement.id = `project-${i}`;
-      projectElement.classList.add('project-item');
-      projectElement.textContent = projects[i].title;
-      projectList.appendChild(projectElement);
-    }
-  };
+  let currentProject = 0;
 
   const renderTodos = (number = 0) => {
     const todoList = document.getElementById('todo-list');
@@ -50,6 +32,24 @@ const ProjectList = () => {
     }
   };
 
+  const renderProjects = () => {
+    const projectList = document.getElementById('project-list');
+    projectList.innerHTML = '';
+
+    for (let i = 0; i < projects.length; i += 1) {
+      const projectElement = document.createElement('li');
+      projectElement.id = `project-${i}`;
+      projectElement.classList.add('project-item');
+      projectElement.textContent = projects[i].title;
+      // eslint-disable-next-line no-loop-func
+      projectElement.addEventListener('click', () => {
+        renderTodos(i);
+        currentProject = i;
+      });
+      projectList.appendChild(projectElement);
+    }
+  };
+
   const addTodoFromForm = (number = 0) => {
     const formTitle = document.getElementById('todo-title').value;
     const formDesc = document.getElementById('todo-desc').value;
@@ -59,39 +59,29 @@ const ProjectList = () => {
     const todoObject = Todo(formTitle, formDesc, formDueDate, formPriority);
     projects[number].addTodo(todoObject);
     const keys = Object.values(todoObject);
-    clear(todoContainer);
-    document.getElementById('column-two').appendChild(TodoList(projects[number]));
+    // document.getElementById('column-two').appendChild(TodoList(projects[number]));
 
+    const todoList = document.getElementById('todo-list');
+    todoList.innerHTML = '';
+    renderTodos(number);
 
     console.log(keys);
   };
 
-  const addTask = () => {
-    let selectedProject;
-    projectContainer.addEventListener('click', (e) => {
-      if (e.target.tagName.toLowerCase() === 'li') {
-        alert(e.target.id);
-        console.log(e.target.tasks);
-        selectedProject = e.target.id;
+  // const addTask = () => {
+  //   let selectedProject;
+  //   projectContainer.addEventListener('click', (e) => {
+  //     if (e.target.tagName.toLowerCase() === 'li') {
+  //       alert(e.target.id);
+  //       console.log(e.target.tasks);
+  //       selectedProject = e.target.id;
+  //       console.log(e);
+  //       // renderTodos(e);
 
-
-        // call function to display form to add task
-      }
-    });
-  };
-
-  addTask();
-
-  projectForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const projectName = projectInput.value;
-    if (projectName == null || projectName === '') return;
-    // const list = createList(projectName);
-    const newProject = Project(projectName);
-    projectInput.value = null;
-    projects.push(newProject);
-    renderProjects();
-  });
+  //       // call function to display form to add task
+  //     }
+  //   });
+  // };
 
   const createTask = (title, desc, dueDate, priority) => ({
     id: Date.now().toString(),
@@ -106,9 +96,23 @@ const ProjectList = () => {
     renderProjects();
   };
 
+  // addTask();
+
+  projectForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const projectName = projectInput.value;
+    if (projectName == null || projectName === '') return;
+    // const list = createList(projectName);
+    const newProject = Project(projectName);
+    projectInput.value = null;
+    projects.push(newProject);
+    renderProjects();
+  });
+
   todoForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    addTodoFromForm(0);
+    addTodoFromForm(currentProject);
+    renderTodos(currentProject);
   });
 
   addProject(Project('Default'));
