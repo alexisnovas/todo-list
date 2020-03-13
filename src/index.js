@@ -1,29 +1,31 @@
 // import display from './display';
-import Project from './project';
+import ProjectList from './projectlist';
 import './css/style.css';
 import Todo from './todo';
 import TodoList from './todolist';
+import Project from './project';
 
 
 // display.pageSetup();
 // Project.render();
-const defaultProject = Project();
-defaultProject.render();
 
-/*const todo1 = Todo('1,Buy Groceires', 'buy more groceries', '12 sep 2022', 2);
-const todo2 = Todo('2,Buy Cars', 'buy more groceries', '12 sep 2022', 2);
-const todo3 = Todo('3,Buy Books', 'buy more groceries', '12 sep 2022', 2);
-const todo4 = Todo('5, Finish Homework', 'buy more groceries', '12 sep 2022', 2);
+const list = ProjectList();
 
-const defaultProject = Project();
+list.addProject(Project('Default'));
+list.addProject(Project('Office tasks'));
 
-defaultProject.render();
+const todo1 = Todo('Buy Groceires', 'buy more groceries', '12 sep 2022', 2);
+const todo2 = Todo('Buy Cars', 'buy more groceries', '12 sep 2022', 2);
+const todo3 = Todo('Buy Books', 'buy more groceries', '12 sep 2022', 2);
+const todo4 = Todo('Finish Homework', 'buy more groceries', '12 sep 2022', 2);
 
-defaultProject.addTodo(todo1);
-defaultProject.addTodo(todo2);
-defaultProject.addTodo(todo3);
-defaultProject.addTodo(todo4);*/
+list.projects[0].addTodo(todo1);
+list.projects[0].addTodo(todo2);
+list.projects[1].addTodo(todo3);
+list.projects[1].addTodo(todo4);
 
-//console.log(defaultProject);
+list.render();
 
-document.getElementById('columnTwo').appendChild(TodoList(defaultProject));
+// console.log(list);
+
+document.getElementById('columnTwo').appendChild(TodoList(list.projects[0]));
