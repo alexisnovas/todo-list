@@ -36,7 +36,13 @@ const ProjectList = () => {
     projects.forEach((item) => {
       console.log(item);
     });
+  };
 
+  const cleanActive = () => {
+    for (let i = 0; i < projects.length; i += 1) {
+      const currentElement = document.querySelector(`#project-${i}`);
+      currentElement.classList.remove('active');
+    }
   };
 
   const renderProjects = () => {
@@ -46,14 +52,16 @@ const ProjectList = () => {
     for (let i = 0; i < projects.length; i += 1) {
       const projectElement = document.createElement('li');
       projectElement.id = `project-${i}`;
-      projectElement.id = 'project-item';
+      // projectElement.id = 'project-item';
       // projectElement.classList.add('project-item');
       projectElement.textContent = projects[i].title;
       // eslint-disable-next-line no-loop-func
       projectElement.addEventListener('click', () => {
         renderTodos(i);
         currentProject = i;
-        switchStyling(projectElement);
+        cleanActive();
+        // switchStyling(projectElement);
+        projectElement.classList.add('active');
       });
       projectList.appendChild(projectElement);
     }
@@ -128,6 +136,7 @@ const ProjectList = () => {
   addProject(Project('Default'));
   renderProjects();
   renderTodos(0);
+  document.getElementById('project-0').classList.add('active');
 
   return {
     projects,
