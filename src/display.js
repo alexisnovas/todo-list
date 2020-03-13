@@ -52,7 +52,7 @@ const display = (() => {
     todoDueDate.id = 'todo-date';
     const select = document.createElement('select');
     select.classList.add('form-control');
-    select.id = "priority"
+    select.id = 'priority';
 
     const optionOne = document.createElement('option');
     optionOne.value = '1';
@@ -70,6 +70,7 @@ const display = (() => {
 
     const listTab = document.createElement('div');
     const list = document.createElement('ul');
+    list.id = 'TodoList';
 
 
     main.appendChild(container);
@@ -98,7 +99,7 @@ const display = (() => {
     select.appendChild(optionTwo);
     select.appendChild(optionThree);
     todoForm.appendChild(taskButton);
-    listHeader.appendChild(listTab);
+    columnTwo.appendChild(listTab);
     listTab.appendChild(list);
 
 

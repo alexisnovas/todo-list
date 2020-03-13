@@ -1,10 +1,9 @@
 const TodoList = (Project) => {
   const base = document.createElement('div');
-  base.className = 'col-12';
   base.id = 'TodoList';
 
   for (let i = 0; i < Project.todos.length; i += 1) {
-    const todoElement = document.createElement('div');
+    const todoElement = document.createElement('li');
     todoElement.className = 'col-12';
     todoElement.id = Project.todos[i].creationDate;
     todoElement.innerHTML = `

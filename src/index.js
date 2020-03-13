@@ -27,5 +27,5 @@ list.projects[1].addTodo(todo4);
 list.render();
 
 // console.log(list);
-
-document.getElementById('columnTwo').appendChild(TodoList(list.projects[0]));
+list.renderTodos();
+//document.getElementById('columnTwo').appendChild(TodoList(list.projects[0]));
