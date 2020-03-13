@@ -31,17 +31,36 @@ const ProjectList = () => {
     }
   };
 
-  const renderTodos = () => {
+  const renderTodos = (number = 0) => {
+    const todoList = document.getElementById('todo-list');
+    todoList.innerHTML = '';
+
+    for (let i = 0; i < projects[number].todos.length; i += 1) {
+      const todoElement = document.createElement('li');
+      todoElement.className = 'col-12';
+      todoElement.id = `todo-${i}`;
+      todoElement.innerHTML = `
+        Task: ${projects[number].todos[i].title}<br>
+        Description: ${projects[number].todos[i].description}<br>
+        Due Date: ${projects[number].todos[i].dueDate}<br>
+        Priority: ${projects[number].todos[i].priority}<br>
+        `;
+
+      todoList.appendChild(todoElement);
+    }
+  };
+
+  const addTodoFromForm = (number = 0) => {
     const formTitle = document.getElementById('todo-title').value;
     const formDesc = document.getElementById('todo-desc').value;
     const formDueDate = document.getElementById('todo-date').value;
     const formPriority = document.getElementById('priority').value;
 
     const todoObject = Todo(formTitle, formDesc, formDueDate, formPriority);
-    projects[0].addTodo(todoObject);
+    projects[number].addTodo(todoObject);
     const keys = Object.values(todoObject);
     clear(todoContainer);
-    document.getElementById('column-two').appendChild(TodoList(projects[0]));
+    document.getElementById('column-two').appendChild(TodoList(projects[number]));
 
 
     console.log(keys);
@@ -89,17 +108,19 @@ const ProjectList = () => {
 
   todoForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    renderTodos();
+    addTodoFromForm(0);
   });
 
+  addProject(Project('Default'));
   renderProjects();
-  renderTodos();
+  renderTodos(0);
 
   return {
     projects,
-    render: renderProjects,
-    addProject,
+    renderProjects,
     renderTodos,
+    addProject,
+    addTodoFromForm,
   };
 };
 

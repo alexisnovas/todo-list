@@ -9,7 +9,7 @@ ui.pageSetup();
 
 const list = ProjectList();
 
-list.addProject(Project('Default'));
+
 list.addProject(Project('Office tasks'));
 
 const todo1 = Todo('Buy Groceires', 'buy more groceries', '12 sep 2022', 2);
