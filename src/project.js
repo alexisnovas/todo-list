@@ -1,23 +1,27 @@
-const Project = (newTitle = 'New Project') => {
-  const id = Date.now().toString();
-  let title = newTitle;
+const Project = (title0 = 'New Project') => {
+  let title = title0;
   const todos = [];
+  const creationDate = Date.now();
 
-  const changeTitle = (string) => {
-    title = string;
+  const changeTitle = (title1) => {
+    title = title1;
   };
 
-  const addTodo = (tasks) => {
-    todos.push(tasks);
-    // projects.tasks.push(Todo)
+  const addTodo = (Todo) => {
+    todos.push(Todo);
+  };
+
+  const remTodo = (number) => {
+    todos.splice(number, 1);
   };
 
   return {
-    id,
     title,
-    changeTitle,
     todos,
+    creationDate,
+    changeTitle,
     addTodo,
+    remTodo,
   };
 };
 

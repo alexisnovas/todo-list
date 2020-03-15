@@ -75,14 +75,14 @@ const Display = () => {
     taskButton.classList.add('btn-success');
     taskButton.textContent = 'Add New Todo';
 
-    const modal = document.createElement('div')
-    modal.id = 'todoModal'
-    modal.classList.add('modal')
+    const modal = document.createElement('div');
+    modal.id = 'todoModal';
+    modal.classList.add('modal');
 
-    const modalContent = document.createElement('div')
-    const close = document.createElement('button')
-    close.textContent = "Close"
-    close.classList.add('close')
+    const modalContent = document.createElement('div');
+    const close = document.createElement('button');
+    close.textContent = 'Close';
+    close.classList.add('close');
 
     columnTwo.appendChild(todoForm);
     todoForm.appendChild(todoTitle);
@@ -98,9 +98,8 @@ const Display = () => {
     todoList.classList.add('todo-list');
     todoList.id = 'todo-list';
     columnTwo.appendChild(todoList);
-    columnTwo.appendChild(modal)
-    modal.appendChild(modalContent)
-
+    columnTwo.appendChild(modal);
+    modal.appendChild(modalContent);
   };
 
   return {
