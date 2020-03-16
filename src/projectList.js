@@ -27,10 +27,22 @@ const ProjectList = () => {
     saveList();
   };
 
+  const delProject = (index) => {
+    projectList = projectList.splice(index, 1);
+    saveList();
+  };
+
+  const delTodo = (indexProject, indexTodo) => {
+    projectList[indexProject].todoList.splice(indexTodo, 1);
+    saveList();
+  };
+
   return {
     projectList,
     addProject,
     addTodo,
+    delProject,
+    delTodo,
   };
 };
 

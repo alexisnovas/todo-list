@@ -1,8 +1,10 @@
+/* eslint-disable prefer-const */
+
 const Todo = (newTitle = 'New Task', newDescription, newDueDate, newPriority = 2) => {
-  const title = newTitle;
-  const description = newDescription;
-  const dueDate = newDueDate;
-  const priority = newPriority;
+  let title = newTitle;
+  let description = newDescription;
+  let dueDate = newDueDate;
+  let priority = newPriority;
   const creationDate = Date.now();
 
   return {

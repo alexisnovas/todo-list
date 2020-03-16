@@ -1,46 +1,54 @@
-body{
+/* body {
   font-size: 14px;
   font-family: 'Open Sans';
   max-width: 1400px;
 }
-/* button{
+
+button{
   margin-top: 10px;
 }
 input{
   margin: 5px 0;
-} */
-.container{
+}
+
+.container {
   width: 100%;
   margin: 2rem auto;
 }
-.active{
+
+.active {
   font-weight: 900;
   color: blue;
   font-size: 15px;
 }
 
-#project-list{
+#project-list {
   padding: 10px 0;
   margin: 0 15px;
 }
-#project-list li{
+
+#project-list li {
   margin: 0 19px;
 }
-.todo-list{
+
+.todo-list {
   padding: 0;
   margin: 0;
 }
-.col-12{
+
+.col-12 {
   margin: 10px 0;
   padding: 10px;
   list-style: none;
   border: 1px solid #ced4da;
 }
-.actionButtons{
+
+.actionButtons {
   position: absolute;
   top: 0;
   right: 2%;
 }
-.actionButtons button{
+
+.actionButtons button {
   margin-left: 5px;
-}
+} */

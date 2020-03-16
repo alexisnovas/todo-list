@@ -1,60 +1,55 @@
 /* eslint-disable no-unused-vars */
+import Create from './create';
 
 const Display = (site) => {
-  const create = (appendTo, className = '', idName = '', elementType = 'div') => {
-    const element = document.createElement(elementType);
-    if (className !== '') element.className = className;
-    if (idName !== '') element.id = idName;
-    if (appendTo != null) appendTo.appendChild(element);
-    return element;
-  };
+  const row = Create(site, 'row');
 
-  const row = create(site, 'row');
-
-  const column1 = create(row, 'col-md-4', 'column-one');
-  const c1Header = create(column1, '', '', 'h1');
+  const column1 = Create(row, 'col-md-5', 'column-one');
+  const c1Header = Create(column1, 'row', '', 'h1');
   c1Header.textContent = 'Projects';
 
-  const c1Form = create(column1, 'row', 'project-form', 'form');
-  const c1Input = create(c1Form, 'form-control col-md-8', 'project-input', 'input');
+  const c1Form = Create(column1, 'row border', 'project-form', 'form');
+  const c1Input = Create(c1Form, 'form-control col-md-8', 'project-input', 'input');
+  const c1Button = Create(c1Form, 'btn btn-primary col-md-4', '', 'button');
   c1Input.type = 'text';
-  const c1Button = create(c1Form, 'btn btn-primary col-md-4', '', 'button');
+  c1Input.placeholder = 'New Project';
   c1Button.textContent = 'Add Project';
-  const projectList = create(column1, '', 'project-list', 'ul');
 
-  const column2 = create(row, 'col-md-8', 'column-two');
-  const listHeader = create(column2, '', '', 'h1');
+  const projectList = Create(column1, 'row border list-group', 'project-list', 'ul');
+
+  const column2 = Create(row, 'col-md-7', 'column-two');
+  const listHeader = Create(column2, 'row', '', 'h1');
   listHeader.textContent = 'Lists';
 
-  const c2Form = create(column2, 'form-group', 'todo-form', 'form');
-  const todoTitle = create(c2Form, 'form-control', 'todo-title', 'input');
+  const c2Form = Create(column2, 'form-group row border', 'todo-form', 'form');
+  const todoTitle = Create(c2Form, 'form-control col-md-6', 'todo-title', 'input');
+  const todoDueDate = Create(c2Form, 'form-control col-md-4', 'todo-date', 'input');
+  const select = Create(c2Form, 'form-control col-md-2', 'priority', 'select');
+  const todoDesc = Create(c2Form, 'form-control', 'todo-desc', 'textarea');
+  const taskButton = Create(c2Form, 'btn btn-success offset-md-8 col-md-4', '', 'button');
+  const optionOne = Create(select, '', '', 'option');
+  const optionTwo = Create(select, '', '', 'option');
+  const optionThree = Create(select, '', '', 'option');
   todoTitle.placeholder = 'Add Title';
-  const todoDesc = create(c2Form, 'form-control', 'todo-desc', 'input');
   todoDesc.placeholder = 'Add description';
-  const todoDueDate = create(c2Form, 'form-control', 'todo-date', 'input');
   todoDueDate.type = 'date';
-  const select = create(c2Form, 'form-control', 'priority', 'select');
-  const optionOne = create(select, '', '', 'option');
   optionOne.value = '1';
   optionOne.textContent = '1';
-  const optionTwo = create(select, '', '', 'option');
   optionTwo.value = '2';
   optionTwo.textContent = '2';
-  const optionThree = create(select, '', '', 'option');
   optionThree.value = '3';
   optionThree.textContent = '3';
-  const taskButton = create(c2Form, 'btn btn-success', '', 'button');
   taskButton.textContent = 'Add New Todo';
 
-  const modal = create(column2, 'modal', 'todo-modal');
+  const modal = Create(column2, 'modal row', 'todo-modal');
 
   const modalContent = (modal);
   const close = (modal, 'close', '', 'button');
 
-  const todoList = create(column2, 'todo-list', 'todo-list', 'ul');
+  const todoList = Create(column2, 'todo-list row list-group', 'todo-list', 'ul');
 
   return {
-    create,
+    create: Create,
   };
 };
 

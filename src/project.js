@@ -1,5 +1,7 @@
+/* eslint-disable prefer-const */
+
 const Project = (newTitle = 'New Project') => {
-  const title = newTitle;
+  let title = newTitle;
   const todoList = [];
   const creationDate = Date.now();
 

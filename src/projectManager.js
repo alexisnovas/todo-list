@@ -1,64 +1,55 @@
+/* eslint-disable no-loop-func */
 /* eslint-disable no-alert */
 /* eslint-disable no-console */
 
 import ProjectList from './projectList';
 import Project from './project';
 import Todo from './todo';
+import Create from './create';
 
 const ProjectManager = () => {
-  const projectForm = document.getElementById('project-form');
-  const projectInput = document.getElementById('project-input');
-  const todoForm = document.querySelector('#todo-form');
   const list = ProjectList();
   let currentProject = 0;
 
-  const changeCurrentProject = (index) => {
-    currentProject = index > list.projectList.length ? list.projectList.length : index;
-  };
-
-  const renderTodos = (number = 0) => {
-    const todoList = document.getElementById('todo-list');
-    todoList.innerHTML = '';
-
-    for (let i = 0; i < list.projectList[number].todoList.length; i += 1) {
-      const todoElement = document.createElement('li');
-      todoElement.className = 'col-12';
-      todoElement.id = `todo-${i}`;
-      todoElement.innerHTML = `
-        <strong>Task: ${list.projectList[number].todoList[i].title}</strong><br>
-        Due Date: ${list.projectList[number].todoList[i].dueDate}<br>
-        `;
-      const actionDiv = document.createElement('div');
-      actionDiv.classList.add('actionButtons');
-      const editBtn = document.createElement('button');
-      editBtn.textContent = 'Edit Task';
-      editBtn.classList.add('btn');
-      editBtn.classList.add('btn-info');
-      const deleteBtn = document.createElement('button');
-      deleteBtn.textContent = 'Delete Task';
-      deleteBtn.classList.add('btn');
-      deleteBtn.classList.add('btn-danger');
-
-      todoList.appendChild(todoElement);
-      todoElement.appendChild(actionDiv);
-      actionDiv.appendChild(editBtn);
-      actionDiv.appendChild(deleteBtn);
-
-      todoElement.addEventListener('click', () => {
-        todoElement.innerHTML = `
-          <strong>Task: ${list.projectList[number].todoList[i].title}</strong><br>
-          <strong>Description: ${list.projectList[number].todoList[i].description}</strong><br>
-          <strong>Due Date: ${list.projectList[number].todoList[i].dueDate}</strong><br>
-          <strong>Priority: ${list.projectList[number].todoList[i].priority}</strong><br>
-          `;
-      });
+  const cleanActive = () => {
+    for (let i = 0; i < list.projectList.length; i += 1) {
+      const currentElement = document.getElementById(`project-${i}`);
+      currentElement.classList.remove('active');
     }
   };
 
-  const cleanActive = () => {
-    for (let i = 0; i < list.projectList.length; i += 1) {
-      const currentElement = document.querySelector(`#project-${i}`);
-      currentElement.classList.remove('active');
+  const renderTodos = (index = 0) => {
+    const todoList = document.getElementById('todo-list');
+    todoList.innerHTML = '';
+
+    for (let i = 0; i < list.projectList[index].todoList.length; i += 1) {
+      const todoElement = Create(todoList, 'list-group-item', `todo-${i}`, 'li');
+      const todoRow = Create(todoElement, 'row', `todo-${i}`, 'li');
+      const todoLeft = Create(todoRow, 'col-md-8');
+      const todoRight = Create(todoRow, 'col-md-4 row justify');
+      const editBtn = Create(todoRight, 'col-6 btn btn-info', '', 'button');
+      const deleteBtn = Create(todoRight, 'col-6 btn btn-danger', '', 'button');
+      todoLeft.innerHTML = `
+      <strong>Task: ${list.projectList[index].todoList[i].title}</strong><br>
+        Due Date: ${list.projectList[index].todoList[i].dueDate}<br>
+        `;
+      todoRight.classList.add('actionButtons');
+      editBtn.textContent = 'Edit';
+      deleteBtn.textContent = 'Delete';
+
+      // todoElement.addEventListener('click', () => {
+      //   todoElement.innerHTML = `
+      //     <strong>Task: ${list.projectList[index].todoList[i].title}</strong><br>
+      //     <strong>Description: ${list.projectList[index].todoList[i].description}</strong><br>
+      //     <strong>Due Date: ${list.projectList[index].todoList[i].dueDate}</strong><br>
+      //     <strong>Priority: ${list.projectList[index].todoList[i].priority}</strong><br>
+      //     `;
+      // });
+
+      deleteBtn.addEventListener('click', () => {
+        list.delTodo(currentProject, i);
+        renderTodos(currentProject);
+      });
     }
   };
 
@@ -67,58 +58,38 @@ const ProjectManager = () => {
     projectList.innerHTML = '';
 
     for (let i = 0; i < list.projectList.length; i += 1) {
-      const projectElement = document.createElement('li');
-      projectElement.id = `project-${i}`;
+      const projectElement = Create(projectList, 'list-group-item', `project-${i}`, 'li');
       projectElement.textContent = list.projectList[i].title;
       projectElement.addEventListener('click', () => {
         renderTodos(i);
-        changeCurrentProject(i);
+        currentProject = i;
         cleanActive();
         projectElement.classList.add('active');
       });
-      projectList.appendChild(projectElement);
     }
   };
 
-  const addTodoFromForm = (index = 0) => {
-    list.addTodo(index, Todo(
+  document.getElementById('project-form').addEventListener('submit', () => {
+    const projectName = document.getElementById('project-input').value;
+    if (projectName == null || projectName === '') return;
+    list.addProject(Project(projectName));
+    document.getElementById('project-input').value = null;
+    renderProjects();
+  });
+
+  document.getElementById('todo-form').addEventListener('submit', () => {
+    list.addTodo(currentProject, Todo(
       document.getElementById('todo-title').value,
       document.getElementById('todo-desc').value,
       document.getElementById('todo-date').value,
       document.getElementById('priority').value,
     ));
-
-    document.getElementById('todo-list').innerHTML = '';
-    renderTodos(index);
-  };
-
-  projectForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const projectName = projectInput.value;
-    if (projectName == null || projectName === '') return;
-    list.addProject(Project(projectName));
-    projectInput.value = null;
-    renderProjects();
-  });
-
-  todoForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    addTodoFromForm(currentProject);
     renderTodos(currentProject);
   });
 
   renderProjects();
   renderTodos(0);
   document.getElementById('project-0').classList.add('active');
-
-  return {
-    list,
-    currentProject,
-    changeCurrentProject,
-    renderProjects,
-    renderTodos,
-    addTodoFromForm,
-  };
 };
 
 export default ProjectManager;
