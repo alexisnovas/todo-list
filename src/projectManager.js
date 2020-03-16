@@ -10,6 +10,7 @@ import Create from './create';
 const ProjectManager = () => {
   const list = ProjectList();
   let currentProject = 0;
+  let currentTodo = 0;
 
   const cleanActive = () => {
     for (let i = 0; i < list.projectList.length; i += 1) {
@@ -41,6 +42,10 @@ const ProjectManager = () => {
       editBtn.setAttribute('data-toggle', 'modal');
       editBtn.setAttribute('data-target', '#myModal');
 
+      editBtn.addEventListener('click', () => {
+        currentTodo = i;
+      });
+
       todoCheckbox.type = 'checkbox';
       if (list.projectList[index].todoList[i].isCompleted) todoCheckbox.checked = true;
       else todoCheckbox.checked = false;
@@ -50,13 +55,6 @@ const ProjectManager = () => {
       });
 
       todoElement.addEventListener('click', () => {
-        const modal = document.getElementById('todo-modal');
-        modal.innerHTML = `
-          <strong>Task: ${list.projectList[index].todoList[i].title}</strong><br>
-          <strong>Description: ${list.projectList[index].todoList[i].description}</strong><br>
-          <strong>Due Date: ${list.projectList[index].todoList[i].dueDate}</strong><br>
-          <strong>Priority: ${list.projectList[index].todoList[i].priority}</strong><br>
-          `;
         document.getElementById('modal-title').value = list.projectList[index].todoList[i].title;
         document.getElementById('modal-date').value = list.projectList[index].todoList[i].dueDate;
         document.getElementById('modal-priority').value = list.projectList[index].todoList[i].priority;
@@ -117,8 +115,7 @@ const ProjectManager = () => {
     }
   });
 
-  const createTask = document.getElementById('todo-form');
-  createTask.addEventListener('submit', (e) => {
+  document.getElementById('todo-form').addEventListener('submit', (e) => {
     e.preventDefault();
     if (document.forms['todo-form'][0].value === null || document.forms['todo-form'][0].value === '') {
       alert('Add the name of the To-do ');
@@ -134,6 +131,20 @@ const ProjectManager = () => {
     }
   });
 
+  document.getElementById('modal-button-save').addEventListener('click', (e) => {
+    e.preventDefault();
+    if (document.forms['todo-modal'][0].value === null || document.forms['todo-modal'][0].value === '') {
+      alert('Add the name of the To-do ');
+    } else {
+      const array = [document.forms['todo-modal'][0].value,
+        document.forms['todo-modal'][1].value,
+        document.forms['todo-modal'][2].value,
+        document.forms['todo-modal'][3].value];
+      list.changeTodo(currentProject, currentTodo, array);
+      renderTodos(currentProject);
+      document.getElementById('todo-modal').reset();
+    }
+  });
 
   renderProjects();
   renderTodos(0);

@@ -48,10 +48,10 @@ const Display = (site) => {
   const modalDialog = Create(modal, 'modal-dialog');
   const modalContent = Create(modalDialog, 'modal-content');
   const modalBody = Create(modalContent, 'modal-body row', 'todo-modal', 'form');
-  const modalTitle = Create(modalContent, 'form-control col-md-6', 'modal-title', 'input');
-  const modalDueDate = Create(modalContent, 'form-control col-md-4', 'modal-date', 'input');
-  const modalPriority = Create(modalContent, 'form-control col-md-2', 'modal-priority', 'select');
-  const modalDesc = Create(modalContent, 'form-control pt-0 pb-0', 'modal-description', 'textarea');
+  const modalTitle = Create(modalBody, 'form-control col-md-6', 'modal-title', 'input');
+  const modalDueDate = Create(modalBody, 'form-control col-md-4', 'modal-date', 'input');
+  const modalPriority = Create(modalBody, 'form-control col-md-2', 'modal-priority', 'select');
+  const modalDesc = Create(modalBody, 'form-control pt-0 pb-0', 'modal-description', 'textarea');
   const modalRow = Create(modalContent, '');
   const modalButtonSave = Create(modalRow, 'btn btn-success offset-8 col-2', 'modal-button-save', 'button');
   const modalButtonCancel = Create(modalRow, 'btn btn-danger col-2', 'modal-button-cancel', 'button');
@@ -59,7 +59,11 @@ const Display = (site) => {
   const modalOptionTwo = Create(modalPriority, '', '', 'option');
   const modalOptionThree = Create(modalPriority, '', '', 'option');
   modalButtonSave.textContent = 'SAVE';
+  modalButtonSave.setAttribute('data-toggle', 'modal');
+  modalButtonSave.setAttribute('data-target', '#myModal');
   modalButtonCancel.textContent = 'CANCEL';
+  modalButtonCancel.setAttribute('data-toggle', 'modal');
+  modalButtonCancel.setAttribute('data-target', '#myModal');
   modalOptionOne.value = '1';
   modalOptionOne.textContent = '1';
   modalOptionTwo.value = '2';

@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable no-console */
 
 import Project from './project';
@@ -44,6 +45,14 @@ const ProjectList = () => {
     saveList();
   };
 
+  const changeTodo = (indexProject, indexTodo, array) => {
+    projectList[indexProject].todoList[indexTodo].title = array[0];
+    projectList[indexProject].todoList[indexTodo].dueDate = array[1];
+    projectList[indexProject].todoList[indexTodo].priority = array[2];
+    projectList[indexProject].todoList[indexTodo].description = array[3];
+    saveList();
+  };
+
   return {
     projectList,
     addProject,
@@ -51,6 +60,7 @@ const ProjectList = () => {
     delProject,
     delTodo,
     switchCompleted,
+    changeTodo,
   };
 };
 
