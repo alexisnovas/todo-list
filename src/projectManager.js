@@ -27,8 +27,8 @@ const ProjectManager = () => {
       const todoRow = Create(todoElement, 'row', `todo-${i}`, 'li');
       const todoLeft = Create(todoRow, 'col-md-8');
       const todoRight = Create(todoRow, 'col-md-4 row justify');
-      const editBtn = Create(todoRight, 'col-6 btn btn-info', '', 'button');
-      const deleteBtn = Create(todoRight, 'col-6 btn btn-danger', '', 'button');
+      const editBtn = Create(todoRight, 'btn btn-info', '', 'button');
+      const deleteBtn = Create(todoRight, 'btn btn-danger', '', 'button');
       todoLeft.innerHTML = `
       <strong>Task: ${list.projectList[index].todoList[i].title}</strong><br>
         Due Date: ${list.projectList[index].todoList[i].dueDate}<br>
@@ -61,8 +61,8 @@ const ProjectManager = () => {
       const rowProject = Create(projectList, 'row col-12');
       const projectElement = Create(rowProject, 'col-sm-9 list-group-item', `project-${i}`, 'li');
       if (i !== 0) {
-        const delButton = Create(rowProject, 'col-sm-3 btn btn-danger', 'delete-project', 'button');
-        delButton.textContent = 'Del';
+        const delButton = Create(rowProject, 'btn btn-danger deleteBtn', 'delete-project', 'button');
+        delButton.textContent = 'Delete';
 
         delButton.addEventListener('click', () => {
           list.delProject(i);
@@ -105,7 +105,9 @@ const ProjectManager = () => {
       document.forms['todo-form'][3].value,
     ));
     renderTodos(currentProject);
+    document.getElementById('todo-form').reset();
   });
+
 
   renderProjects();
   renderTodos(0);

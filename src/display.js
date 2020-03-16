@@ -2,10 +2,10 @@
 import Create from './create';
 
 const Display = (site) => {
-  const row1 = Create(site, 'row');
+  const row1 = Create(site, 'row row1');
   const row2 = Create(site, 'row');
 
-  const columnLeft1 = Create(row1, 'col-md-5');
+  const columnLeft1 = Create(row1, 'col-md-4');
   const c1Header = Create(columnLeft1, 'row', '', 'h1');
   c1Header.textContent = 'Projects';
   const c1Form = Create(columnLeft1, 'row border', 'project-form', 'form');
@@ -21,7 +21,7 @@ const Display = (site) => {
   const todoDueDate = Create(c2Form, 'form-control col-md-4', 'todo-date', 'input');
   const select = Create(c2Form, 'form-control col-md-2', 'priority', 'select');
   const todoDesc = Create(c2Form, 'form-control pt-0 pb-0', 'todo-desc', 'textarea');
-  const taskButton = Create(c2Form, 'btn btn-success offset-md-8 col-md-4 align-self-end p-0', '', 'button');
+  const taskButton = Create(c2Form, 'btn btn-success offset-md-8 col-md-4 align-self-end', '', 'button');
   const optionOne = Create(select, '', '', 'option');
   const optionTwo = Create(select, '', '', 'option');
   const optionThree = Create(select, '', '', 'option');

@@ -1,40 +1,43 @@
-/* body {
+body {
   font-size: 14px;
   font-family: 'Open Sans';
   max-width: 1400px;
-}
-
-button{
-  margin-top: 10px;
-}
-input{
-  margin: 5px 0;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
   width: 100%;
   margin: 2rem auto;
 }
-*/
+
 .Active {
   font-weight: 900;
   color: white;
   background-color: #016AD9;
   font-size: 15px;
 }
-/*
-#project-list {
-  padding: 10px 0;
-  margin: 0 15px;
+.row1 div{
+  margin: 0 10px;
 }
 
+.deleteBtn{
+  margin: 5px 2px;
+}
+
+#project-list {
+  margin: 5px 0;
+}
+
+.actionButtons button {
+  margin-left: 5px;
+}
+#todo-form input{
+  margin: 1px;
+}
+/*
 #project-list li {
   margin: 0 19px;
-}
-
-.todo-list {
-  padding: 0;
-  margin: 0;
 }
 
 .col-12 {
@@ -50,9 +53,7 @@ input{
   right: 2%;
 }
 
-.actionButtons button {
-  margin-left: 5px;
-} */
+ */
 
 #todo-desc {
   height: 58px;
