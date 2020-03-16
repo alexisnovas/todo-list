@@ -4,8 +4,7 @@ import Display from './display';
 import ProjectManager from './projectManager';
 import './css/style.css';
 
-const ui = Display();
-ui.pageSetup();
+const ui = Display(document.getElementById('container'));
 
 const list = ProjectManager();
 
