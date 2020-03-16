@@ -24,9 +24,9 @@ const ProjectManager = () => {
 
     for (let i = 0; i < list.projectList[index].todoList.length; i += 1) {
       const todoElement = Create(todoList, 'list-group-item', `todo-${i}`, 'li');
-      const todoRow = Create(todoElement, 'row', `todo-${i}`, 'li');
-      const todoLeft = Create(todoRow, 'col-md-8');
-      const todoRight = Create(todoRow, 'col-md-4 row justify');
+      const todoRow = Create(todoElement, 'row action', `todo-${i}`, 'li');
+      const todoLeft = Create(todoRow, 'col-md-9');
+      const todoRight = Create(todoRow, 'col-md-3');
       const editBtn = Create(todoRight, 'btn btn-info', '', 'button');
       const deleteBtn = Create(todoRight, 'btn btn-danger', '', 'button');
       todoLeft.innerHTML = `
@@ -36,6 +36,7 @@ const ProjectManager = () => {
       todoRight.classList.add('actionButtons');
       editBtn.textContent = 'Edit';
       deleteBtn.textContent = 'Delete';
+
 
       todoElement.addEventListener('click', () => {
         todoElement.innerHTML = `
@@ -69,7 +70,11 @@ const ProjectManager = () => {
           renderTodos(0);
           renderProjects(0);
         });
+      } else {
+        const delButton = Create(rowProject, 'btn btn-danger defaultBtn disabled deleteBtn', 'delete-project', 'button');
+        delButton.textContent = 'Delete';
       }
+
       projectElement.textContent = list.projectList[i].title;
       projectElement.addEventListener('click', () => {
         renderTodos(i);
@@ -96,16 +101,21 @@ const ProjectManager = () => {
     }
   });
 
-  document.getElementById('todo-form').addEventListener('submit', (e) => {
+  const createTask = document.getElementById('todo-form');
+  createTask.addEventListener('submit', (e) => {
     e.preventDefault();
-    list.addTodo(currentProject, Todo(
-      document.forms['todo-form'][0].value,
-      document.forms['todo-form'][1].value,
-      document.forms['todo-form'][2].value,
-      document.forms['todo-form'][3].value,
-    ));
-    renderTodos(currentProject);
-    document.getElementById('todo-form').reset();
+    if (document.forms['todo-form'][0].value === null || document.forms['todo-form'][0].value === '') {
+      alert('Add the name of the To-do ');
+    } else {
+      list.addTodo(currentProject, Todo(
+        document.forms['todo-form'][0].value,
+        document.forms['todo-form'][1].value,
+        document.forms['todo-form'][2].value,
+        document.forms['todo-form'][3].value,
+      ));
+      renderTodos(currentProject);
+      document.getElementById('todo-form').reset();
+    }
   });
 
 

@@ -13,17 +13,40 @@ body {
 
 .Active {
   font-weight: 900;
-  color: white;
-  background-color: #016AD9;
-  font-size: 15px;
+  color: #016AD9;
+  font-size: 16px;
 }
+#todo-form input{
+  margin: 3px;
+}
+#todo-form select{
+  margin: 3px;
+}
+#todo-form textarea{
+  margin: 3px;
+}
+.list-group-item{
+  border-top: none;
+  border-right: none;
+  border-left: none;
+}
+.deleteBtn{
+  margin: 5px 2px;
+}
+.action button{
+  margin-left: 2px;
+}
+
+.btn.disabled,
+.btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+/*
 .row1 div{
   margin: 0 10px;
 }
 
-.deleteBtn{
-  margin: 5px 2px;
-}
 
 #project-list {
   margin: 5px 0;
@@ -32,29 +55,9 @@ body {
 .actionButtons button {
   margin-left: 5px;
 }
-#todo-form input{
-  margin: 1px;
-}
-/*
-#project-list li {
-  margin: 0 19px;
-}
 
-.col-12 {
-  margin: 10px 0;
-  padding: 10px;
-  list-style: none;
-  border: 1px solid #ced4da;
-}
-
-.actionButtons {
-  position: absolute;
-  top: 0;
-  right: 2%;
-}
-
- */
 
 #todo-desc {
   height: 58px;
 }
+*/
