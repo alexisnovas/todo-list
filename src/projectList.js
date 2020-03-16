@@ -28,7 +28,7 @@ const ProjectList = () => {
   };
 
   const delProject = (index) => {
-    projectList = projectList.splice(index, 1);
+    if (index !== 0) projectList.splice(index, 1);
     saveList();
   };
 

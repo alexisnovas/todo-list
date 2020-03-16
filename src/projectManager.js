@@ -14,7 +14,7 @@ const ProjectManager = () => {
   const cleanActive = () => {
     for (let i = 0; i < list.projectList.length; i += 1) {
       const currentElement = document.getElementById(`project-${i}`);
-      currentElement.classList.remove('active');
+      currentElement.classList.remove('Active');
     }
   };
 
@@ -37,14 +37,14 @@ const ProjectManager = () => {
       editBtn.textContent = 'Edit';
       deleteBtn.textContent = 'Delete';
 
-      // todoElement.addEventListener('click', () => {
-      //   todoElement.innerHTML = `
-      //     <strong>Task: ${list.projectList[index].todoList[i].title}</strong><br>
-      //     <strong>Description: ${list.projectList[index].todoList[i].description}</strong><br>
-      //     <strong>Due Date: ${list.projectList[index].todoList[i].dueDate}</strong><br>
-      //     <strong>Priority: ${list.projectList[index].todoList[i].priority}</strong><br>
-      //     `;
-      // });
+      todoElement.addEventListener('click', () => {
+        todoElement.innerHTML = `
+          <strong>Task: ${list.projectList[index].todoList[i].title}</strong><br>
+          <strong>Description: ${list.projectList[index].todoList[i].description}</strong><br>
+          <strong>Due Date: ${list.projectList[index].todoList[i].dueDate}</strong><br>
+          <strong>Priority: ${list.projectList[index].todoList[i].priority}</strong><br>
+          `;
+      });
 
       deleteBtn.addEventListener('click', () => {
         list.delTodo(currentProject, i);
@@ -58,17 +58,29 @@ const ProjectManager = () => {
     projectList.innerHTML = '';
 
     for (let i = 0; i < list.projectList.length; i += 1) {
-      const projectElement = Create(projectList, 'list-group-item', `project-${i}`, 'li');
+      const rowProject = Create(projectList, 'row col-12');
+      const projectElement = Create(rowProject, 'col-sm-9 list-group-item', `project-${i}`, 'li');
+      if (i !== 0) {
+        const delButton = Create(rowProject, 'col-sm-3 btn btn-danger', 'delete-project', 'button');
+        delButton.textContent = 'Del';
+
+        delButton.addEventListener('click', () => {
+          list.delProject(i);
+          renderTodos(0);
+          renderProjects(0);
+        });
+      }
       projectElement.textContent = list.projectList[i].title;
       projectElement.addEventListener('click', () => {
         renderTodos(i);
         currentProject = i;
         cleanActive();
-        projectElement.classList.add('active');
+        projectElement.classList.add('Active');
       });
     }
 
     cleanActive();
+    renderTodos(currentProject);
     currentProject = index;
     document.getElementById(`project-${index}`).classList.add('Active');
   };
@@ -97,7 +109,7 @@ const ProjectManager = () => {
 
   renderProjects();
   renderTodos(0);
-  document.getElementById('project-0').classList.add('active');
+  document.getElementById('project-0').classList.add('Active');
 };
 
 export default ProjectManager;

@@ -8,7 +8,6 @@ const ui = Display(document.getElementById('container'));
 
 const list = ProjectManager();
 
-// #region storage test
 // const Test = (a, b) => {
 //   const obj1 = a;
 //   const obj2 = b;
@@ -31,4 +30,3 @@ const list = ProjectManager();
 
 // console.log(`test1: ${test1.obj1}`);
 // console.log(`test1 sum: ${test1.sum()}`);
-// //#endregion

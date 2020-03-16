@@ -15,13 +15,14 @@ input{
   width: 100%;
   margin: 2rem auto;
 }
-
-.active {
+*/
+.Active {
   font-weight: 900;
-  color: blue;
+  color: white;
+  background-color: #016AD9;
   font-size: 15px;
 }
-
+/*
 #project-list {
   padding: 10px 0;
   margin: 0 15px;
