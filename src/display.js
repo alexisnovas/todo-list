@@ -44,11 +44,18 @@ const Display = (site) => {
   const columnRight2 = Create(row2, 'col-md-7');
   const todoList = Create(columnRight2, 'row todo-list list-group', 'todo-list', 'ul');
 
-  // const modal = Create(column2, 'modal row', 'todo-modal');
-
-  // const modalContent = (modal);
-  // const close = (modal, 'close', '', 'button');
-
+  const modal = Create(columnRight2, 'modal', 'myModal');
+  const modalDialog = Create(modal, 'modal-dialog');
+  const modalContent = Create(modalDialog, 'modal-content');
+  const modalBody = Create(modalContent, 'modal-body row', 'todo-modal', 'form');
+  const modalTitle = Create(modalContent, 'form-control col-md-6', 'todo-title', 'input');
+  const modalDueDate = Create(modalContent, 'form-control col-md-4', 'todo-date', 'input');
+  const modalSelect = Create(modalContent, 'form-control col-md-2', 'priority', 'select');
+  const modalDesc = Create(modalContent, 'form-control pt-0 pb-0', 'todo-desc', 'textarea');
+  const modalButton = Create(modalContent, 'btn btn-success offset-md-8 col-md-4 align-self-end', '', 'button');
+  const modalOptionOne = Create(modalSelect, '', '', 'option');
+  const modalOptionTwo = Create(modalSelect, '', '', 'option');
+  const modalOptionThree = Create(modalSelect, '', '', 'option');
 
   return {
     create: Create,

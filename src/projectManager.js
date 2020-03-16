@@ -36,10 +36,12 @@ const ProjectManager = () => {
       todoRight.classList.add('actionButtons');
       editBtn.textContent = 'Edit';
       deleteBtn.textContent = 'Delete';
-
+      editBtn.setAttribute('data-toggle', 'modal');
+      editBtn.setAttribute('data-target', '#myModal');
 
       todoElement.addEventListener('click', () => {
-        todoElement.innerHTML = `
+        const modal = document.getElementById('todo-modal');
+        modal.innerHTML = `
           <strong>Task: ${list.projectList[index].todoList[i].title}</strong><br>
           <strong>Description: ${list.projectList[index].todoList[i].description}</strong><br>
           <strong>Due Date: ${list.projectList[index].todoList[i].dueDate}</strong><br>
