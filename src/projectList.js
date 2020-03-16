@@ -37,12 +37,20 @@ const ProjectList = () => {
     saveList();
   };
 
+  const switchCompleted = (indexProject, indexTodo) => {
+    const todo = projectList[indexProject].todoList[indexTodo];
+    if (todo.isCompleted === true) todo.isCompleted = false;
+    else todo.isCompleted = true;
+    saveList();
+  };
+
   return {
     projectList,
     addProject,
     addTodo,
     delProject,
     delTodo,
+    switchCompleted,
   };
 };
 

@@ -5,6 +5,7 @@ const Todo = (newTitle = 'New Task', newDueDate, newPriority = 2, newDescription
   let dueDate = newDueDate;
   let priority = newPriority;
   let description = newDescription;
+  let isCompleted = false;
   const creationDate = Date.now();
 
   return {
@@ -12,6 +13,7 @@ const Todo = (newTitle = 'New Task', newDueDate, newPriority = 2, newDescription
     dueDate,
     priority,
     description,
+    isCompleted,
     creationDate,
   };
 };

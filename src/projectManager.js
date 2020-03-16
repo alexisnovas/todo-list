@@ -25,11 +25,13 @@ const ProjectManager = () => {
     for (let i = 0; i < list.projectList[index].todoList.length; i += 1) {
       const todoElement = Create(todoList, 'list-group-item', `todo-${i}`, 'li');
       const todoRow = Create(todoElement, 'row action', `todo-${i}`, 'li');
-      const todoLeft = Create(todoRow, 'col-md-9');
+      const todoLeft = Create(todoRow, 'col-md-1');
+      const todoCheckbox = Create(todoLeft, '', `checkbox-${i}`, 'input');
+      const todoMiddle = Create(todoRow, 'col-md-8');
       const todoRight = Create(todoRow, 'col-md-3');
       const editBtn = Create(todoRight, 'btn btn-info', '', 'button');
       const deleteBtn = Create(todoRight, 'btn btn-danger', '', 'button');
-      todoLeft.innerHTML = `
+      todoMiddle.innerHTML = `
       <strong>Task: ${list.projectList[index].todoList[i].title}</strong><br>
         Due Date: ${list.projectList[index].todoList[i].dueDate}<br>
         `;
@@ -39,6 +41,14 @@ const ProjectManager = () => {
       editBtn.setAttribute('data-toggle', 'modal');
       editBtn.setAttribute('data-target', '#myModal');
 
+      todoCheckbox.type = 'checkbox';
+      if (list.projectList[index].todoList[i].isCompleted) todoCheckbox.checked = true;
+      else todoCheckbox.checked = false;
+      todoCheckbox.addEventListener('change', () => {
+        list.switchCompleted(index, i);
+        renderTodos(index);
+      });
+
       todoElement.addEventListener('click', () => {
         const modal = document.getElementById('todo-modal');
         modal.innerHTML = `
@@ -47,6 +57,10 @@ const ProjectManager = () => {
           <strong>Due Date: ${list.projectList[index].todoList[i].dueDate}</strong><br>
           <strong>Priority: ${list.projectList[index].todoList[i].priority}</strong><br>
           `;
+        document.getElementById('modal-title').value = list.projectList[index].todoList[i].title;
+        document.getElementById('modal-date').value = list.projectList[index].todoList[i].dueDate;
+        document.getElementById('modal-priority').value = list.projectList[index].todoList[i].priority;
+        document.getElementById('modal-description').value = list.projectList[index].todoList[i].description;
       });
 
       deleteBtn.addEventListener('click', () => {
