@@ -1,31 +1,32 @@
 /* eslint-disable no-alert */
 /* eslint-disable no-console */
-import Todo from './todo';
-// import TodoList from './todolist';
-import Project from './project';
 
-const ProjectList = () => {
+import ProjectList from './projectList';
+import Project from './project';
+import Todo from './todo';
+
+const ProjectManager = () => {
   const projectForm = document.getElementById('project-form');
   const projectInput = document.getElementById('project-input');
   const todoForm = document.querySelector('#todo-form');
-  const projects = [];
+  const list = ProjectList();
   let currentProject = 0;
 
   const changeCurrentProject = (index) => {
-    currentProject = index > projects.length ? projects.length : index;
+    currentProject = index > list.projectList.length ? list.projectList.length : index;
   };
 
   const renderTodos = (number = 0) => {
     const todoList = document.getElementById('todo-list');
     todoList.innerHTML = '';
 
-    for (let i = 0; i < projects[number].todos.length; i += 1) {
+    for (let i = 0; i < list.projectList[number].todoList.length; i += 1) {
       const todoElement = document.createElement('li');
       todoElement.className = 'col-12';
       todoElement.id = `todo-${i}`;
       todoElement.innerHTML = `
-        <strong>Task: ${projects[number].todos[i].title}</strong><br>
-        Due Date: ${projects[number].todos[i].dueDate}<br>
+        <strong>Task: ${list.projectList[number].todoList[i].title}</strong><br>
+        Due Date: ${list.projectList[number].todoList[i].dueDate}<br>
         `;
       const actionDiv = document.createElement('div');
       actionDiv.classList.add('actionButtons');
@@ -44,19 +45,18 @@ const ProjectList = () => {
       actionDiv.appendChild(deleteBtn);
 
       todoElement.addEventListener('click', () => {
-        console.log(`${projects[number].todos[i].title}and ${projects[number].todos[i].description}`);
         todoElement.innerHTML = `
-          <strong>Task: ${projects[number].todos[i].title}</strong><br>
-          <strong>Description: ${projects[number].todos[i].description}</strong><br>
-          <strong>Due Date: ${projects[number].todos[i].dueDate}</strong><br>
-          <strong>Priority: ${projects[number].todos[i].priority}</strong><br>
+          <strong>Task: ${list.projectList[number].todoList[i].title}</strong><br>
+          <strong>Description: ${list.projectList[number].todoList[i].description}</strong><br>
+          <strong>Due Date: ${list.projectList[number].todoList[i].dueDate}</strong><br>
+          <strong>Priority: ${list.projectList[number].todoList[i].priority}</strong><br>
           `;
       });
     }
   };
 
   const cleanActive = () => {
-    for (let i = 0; i < projects.length; i += 1) {
+    for (let i = 0; i < list.projectList.length; i += 1) {
       const currentElement = document.querySelector(`#project-${i}`);
       currentElement.classList.remove('active');
     }
@@ -66,10 +66,10 @@ const ProjectList = () => {
     const projectList = document.getElementById('project-list');
     projectList.innerHTML = '';
 
-    for (let i = 0; i < projects.length; i += 1) {
+    for (let i = 0; i < list.projectList.length; i += 1) {
       const projectElement = document.createElement('li');
       projectElement.id = `project-${i}`;
-      projectElement.textContent = projects[i].title;
+      projectElement.textContent = list.projectList[i].title;
       projectElement.addEventListener('click', () => {
         renderTodos(i);
         changeCurrentProject(i);
@@ -80,35 +80,24 @@ const ProjectList = () => {
     }
   };
 
-  const addTodoFromForm = (number = 0) => {
-    const formTitle = document.getElementById('todo-title').value;
-    const formDesc = document.getElementById('todo-desc').value;
-    const formDueDate = document.getElementById('todo-date').value;
-    const formPriority = document.getElementById('priority').value;
+  const addTodoFromForm = (index = 0) => {
+    list.addTodo(index, Todo(
+      document.getElementById('todo-title').value,
+      document.getElementById('todo-desc').value,
+      document.getElementById('todo-date').value,
+      document.getElementById('priority').value,
+    ));
 
-    const todoObject = Todo(formTitle, formDesc, formDueDate, formPriority);
-    projects[number].addTodo(todoObject);
-    const keys = Object.values(todoObject);
-
-    const todoList = document.getElementById('todo-list');
-    todoList.innerHTML = '';
-    renderTodos(number);
-
-    console.log(keys);
-  };
-
-  const addProject = (Object) => {
-    projects.push(Object);
-    renderProjects();
+    document.getElementById('todo-list').innerHTML = '';
+    renderTodos(index);
   };
 
   projectForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const projectName = projectInput.value;
     if (projectName == null || projectName === '') return;
-    const newProject = Project(projectName);
+    list.addProject(Project(projectName));
     projectInput.value = null;
-    projects.push(newProject);
     renderProjects();
   });
 
@@ -118,20 +107,18 @@ const ProjectList = () => {
     renderTodos(currentProject);
   });
 
-  addProject(Project('Default'));
   renderProjects();
   renderTodos(0);
   document.getElementById('project-0').classList.add('active');
 
   return {
-    projects,
+    list,
     currentProject,
     changeCurrentProject,
     renderProjects,
     renderTodos,
-    addProject,
     addTodoFromForm,
   };
 };
 
-export default ProjectList;
+export default ProjectManager;
