@@ -52,3 +52,7 @@ input{
 .actionButtons button {
   margin-left: 5px;
 } */
+
+#todo-desc {
+  height: 58px;
+}

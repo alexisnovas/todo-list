@@ -53,7 +53,7 @@ const ProjectManager = () => {
     }
   };
 
-  const renderProjects = () => {
+  const renderProjects = (index = 0) => {
     const projectList = document.getElementById('project-list');
     projectList.innerHTML = '';
 
@@ -67,22 +67,30 @@ const ProjectManager = () => {
         projectElement.classList.add('active');
       });
     }
+
+    cleanActive();
+    currentProject = index;
+    document.getElementById(`project-${index}`).classList.add('Active');
   };
 
-  document.getElementById('project-form').addEventListener('submit', () => {
-    const projectName = document.getElementById('project-input').value;
-    if (projectName == null || projectName === '') return;
-    list.addProject(Project(projectName));
-    document.getElementById('project-input').value = null;
-    renderProjects();
+  document.getElementById('project-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const newProject = document.forms['project-form'][0];
+
+    if (newProject.value !== '') {
+      list.addProject(Project(newProject.value));
+      newProject.value = null;
+      renderProjects(list.projectList.length - 1);
+    }
   });
 
-  document.getElementById('todo-form').addEventListener('submit', () => {
+  document.getElementById('todo-form').addEventListener('submit', (e) => {
+    e.preventDefault();
     list.addTodo(currentProject, Todo(
-      document.getElementById('todo-title').value,
-      document.getElementById('todo-desc').value,
-      document.getElementById('todo-date').value,
-      document.getElementById('priority').value,
+      document.forms['todo-form'][0].value,
+      document.forms['todo-form'][1].value,
+      document.forms['todo-form'][2].value,
+      document.forms['todo-form'][3].value,
     ));
     renderTodos(currentProject);
   });

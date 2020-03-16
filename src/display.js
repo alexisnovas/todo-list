@@ -2,35 +2,31 @@
 import Create from './create';
 
 const Display = (site) => {
-  const row = Create(site, 'row');
+  const row1 = Create(site, 'row');
+  const row2 = Create(site, 'row');
 
-  const column1 = Create(row, 'col-md-5', 'column-one');
-  const c1Header = Create(column1, 'row', '', 'h1');
+  const columnLeft1 = Create(row1, 'col-md-5');
+  const c1Header = Create(columnLeft1, 'row', '', 'h1');
   c1Header.textContent = 'Projects';
-
-  const c1Form = Create(column1, 'row border', 'project-form', 'form');
+  const c1Form = Create(columnLeft1, 'row border', 'project-form', 'form');
   const c1Input = Create(c1Form, 'form-control col-md-8', 'project-input', 'input');
   const c1Button = Create(c1Form, 'btn btn-primary col-md-4', '', 'button');
   c1Input.type = 'text';
   c1Input.placeholder = 'New Project';
   c1Button.textContent = 'Add Project';
 
-  const projectList = Create(column1, 'row border list-group', 'project-list', 'ul');
-
-  const column2 = Create(row, 'col-md-7', 'column-two');
-  const listHeader = Create(column2, 'row', '', 'h1');
-  listHeader.textContent = 'Lists';
-
-  const c2Form = Create(column2, 'form-group row border', 'todo-form', 'form');
+  const columnRight1 = Create(row1, 'col-md-7');
+  const c2Form = Create(columnRight1, 'form-group row', 'todo-form', 'form');
   const todoTitle = Create(c2Form, 'form-control col-md-6', 'todo-title', 'input');
   const todoDueDate = Create(c2Form, 'form-control col-md-4', 'todo-date', 'input');
   const select = Create(c2Form, 'form-control col-md-2', 'priority', 'select');
-  const todoDesc = Create(c2Form, 'form-control', 'todo-desc', 'textarea');
-  const taskButton = Create(c2Form, 'btn btn-success offset-md-8 col-md-4', '', 'button');
+  const todoDesc = Create(c2Form, 'form-control pt-0 pb-0', 'todo-desc', 'textarea');
+  const taskButton = Create(c2Form, 'btn btn-success offset-md-8 col-md-4 align-self-end p-0', '', 'button');
   const optionOne = Create(select, '', '', 'option');
   const optionTwo = Create(select, '', '', 'option');
   const optionThree = Create(select, '', '', 'option');
   todoTitle.placeholder = 'Add Title';
+  todoTitle.setAttribute('name', 'title');
   todoDesc.placeholder = 'Add description';
   todoDueDate.type = 'date';
   optionOne.value = '1';
@@ -41,12 +37,18 @@ const Display = (site) => {
   optionThree.textContent = '3';
   taskButton.textContent = 'Add New Todo';
 
-  const modal = Create(column2, 'modal row', 'todo-modal');
 
-  const modalContent = (modal);
-  const close = (modal, 'close', '', 'button');
+  const columnLeft2 = Create(row2, 'col-md-5');
+  const projectList = Create(columnLeft2, 'row list-group', 'project-list', 'ul');
 
-  const todoList = Create(column2, 'todo-list row list-group', 'todo-list', 'ul');
+  const columnRight2 = Create(row2, 'col-md-7');
+  const todoList = Create(columnRight2, 'row todo-list list-group', 'todo-list', 'ul');
+
+  // const modal = Create(column2, 'modal row', 'todo-modal');
+
+  // const modalContent = (modal);
+  // const close = (modal, 'close', '', 'button');
+
 
   return {
     create: Create,
