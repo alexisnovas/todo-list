@@ -7,11 +7,13 @@
 
 <center><h1>Microverse 604: ToDo App</h1></center>
 
-<center><h2>Try a live version of this project here: <a href="https://raw.githack.com/rmauritsson/todo-list/feature/logic/dist/index.html">https://jairjy.github.io/Microverse-601-Library/</a><h2></center>
+<center><h2>Try a: <a href="https://raw.githack.com/rmauritsson/todo-list/feature/logic/dist/index.html">live version</a><h2></center>
 
 ## About The Project
 
 This project is a Todo web app that allows you to make To-Dos type of notes, create as many projects as you want to put more To-Dos in them. You can edit and delete them.
+
+To run the application, npm run build  
 
 ### Built With
 
