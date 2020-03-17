@@ -7,13 +7,15 @@
 
 <center><h1>Microverse 604: ToDo App</h1></center>
 
-<center><h2>Try a: <a href="https://raw.githack.com/rmauritsson/todo-list/feature/logic/dist/index.html">live version</a><h2></center>
+<center><h2><a href="https://raw.githack.com/rmauritsson/todo-list/feature/logic/dist/index.html">Check a live version of this project</a><h2></center>
 
 ## About The Project
 
 This project is a Todo web app that allows you to make To-Dos type of notes, create as many projects as you want to put more To-Dos in them. You can edit and delete them.
 
-To run the application, npm run build
+<p align="center">
+  <img src="./doc/screenshot.png" alt="screenshot">
+</p>
 
 ### Built With
 
@@ -42,8 +44,8 @@ curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
 sudo apt-get install -y nodejs
 ```
 
-* If you're using Microsoft Windows, the Git installer can be found (here)[https://gitforwindows.org/], and Node JS/NPM installer can be found (here)[https://nodejs.org/en/download/].
-* If you have another type of Linux Distribution, you can check how to install Node JS and NPM by checking (this article)[https://nodejs.org/en/download/package-manager/].
+* If you're using Microsoft Windows, the Git installer can be found [here](https://gitforwindows.org/), and Node JS/NPM installer can be found [here](https://nodejs.org/en/download/).
+* If you have another type of Linux Distribution, you can check how to install Node JS and NPM by checking [this article](https://nodejs.org/en/download/package-manager/).
 
 ### Installation
 
@@ -55,24 +57,47 @@ Go to the repository folder and install the NPM modules:
 
 ```sh
 npm install
+npm install --save-dev webpack webpack-cli
 ```
 
-## Usage
-
-Run the server by using the console, in the root directory of the repository, execute the command:
+Then, generate the main.js file by using webpack.
 
 ```sh
-rails server
+npx webpack --mode=development
+```
+For development mode, and:
+
+```sh
+npx webpack --mode=production
+```
+For production.
+## Usage
+
+The To-Do program needs a container on your DOM with the id 'container' in order to append the interface and generate the Project List object.
+
+If you want to test the web app, create an index.html file inside the dist/ directory and add the main.js script, along with bootstrap. Then add a 'div' element in the body with the 'container' id tag:
+
+```html
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div id="container" class="container"></div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="main.js" defer></script>
+  </body>
+</html>
 ```
 
-Once the server is running, create a new user by accessing to the url: http://localhost:3000/signup
-
-After that, login using the email and password of the created using in the url: http://localhost:3000/login
-
-To create a new post, use this url: http://localhost:3000/posts/new
-
-Finally, you can see the posts that the members have submitted by visiting this url: http://localhost:3000 . Notice that only the logged members can see the author of such posts.
-
+Then just open the index.html file on your browser.
 
 ## License
 
